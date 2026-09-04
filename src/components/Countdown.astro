@@ -1,0 +1,82 @@
+<h2>Countdown to midnight</h2>
+<p id="countdown" role="timer">
+  Play at midnight in your local time, when 2026 becomes 2027.
+</p>
+<span id="countdown-status" role="status" aria-atomic="true"></span>
+<p id="timezone">Your local time</p>
+
+<script>
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const nyeTime = new Date(2027, 0, 1);
+
+  // Seconds are rounded up
+  const convertMs = (ms: number) => {
+    const roundedMs = Math.ceil(ms / 1000) * 1000;
+    const msInSecond = 1000;
+    const msInMinute = 60 * msInSecond;
+    const msInHour = 60 * msInMinute;
+    const msInDay = 24 * msInHour;
+
+    const days = Math.floor(roundedMs / msInDay);
+    const hours = Math.floor((roundedMs % msInDay) / msInHour);
+    const minutes = Math.floor((roundedMs % msInHour) / msInMinute);
+    const seconds = Math.floor((roundedMs % msInMinute) / msInSecond);
+
+    return { days, hours, minutes, seconds };
+  };
+
+  // Milliseconds between two Dates
+  // Clamp at 0 instead of counting into negatives
+  const calculateDifference = (currentDate: Date, targetDate: Date) => {
+    return Math.max(0, targetDate.getTime() - currentDate.getTime());
+  };
+
+  // Controls how the text is formatted and displayed in the element
+  const render = (difference: number) => {
+    const { days, hours, minutes, seconds } = convertMs(difference);
+    const daysText = `${days} ${days === 1 ? "day" : "days"}`;
+    const hoursText = `${hours} ${hours === 1 ? "hour" : "hours"}`;
+    const minutesText = `${minutes} ${minutes === 1 ? "minute" : "minutes"}`;
+    const secondsText = `${seconds} ${seconds === 1 ? "second" : "seconds"}`;
+    return `${daysText}, ${hoursText}, ${minutesText}, ${secondsText}`;
+  };
+
+  const initialize = () => {
+    const countdownParagraph = document.getElementById("countdown");
+    const timezoneParagraph = document.getElementById("timezone");
+    const statusSpan = document.getElementById("countdown-status");
+
+    if (!countdownParagraph || !statusSpan) {
+      return;
+    }
+
+    if (timezoneParagraph && userTimeZone) {
+      timezoneParagraph.textContent = `Your detected time zone: ${userTimeZone}`;
+    }
+
+    // Renders the countdown or completed state
+    const update = () => {
+      const difference = calculateDifference(new Date(), nyeTime);
+      const isMidnight = difference === 0;
+      if (isMidnight) {
+        countdownParagraph.hidden = true;
+        statusSpan.textContent = "Play G!";
+      } else {
+        countdownParagraph.textContent = render(difference);
+      }
+      return isMidnight;
+    };
+
+    const isMidnight = update();
+    if (!isMidnight) {
+      const interval = setInterval(() => {
+        const isMidnight = update();
+        if (isMidnight) {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+  };
+
+  initialize();
+</script>
