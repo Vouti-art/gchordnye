@@ -1,0 +1,25 @@
+---
+import { performances } from "../data/performances";
+---
+
+{
+  performances.length > 0 && (
+    <section>
+      <h2>Past performances</h2>
+      <ul>
+        {performances.map((performance) => (
+          <li>
+            <>
+              <h3>
+                <a href={performance.originalPostUrl}>
+                  Watch {performance.performerCredit}'s post on Instagram
+                </a>
+              </h3>
+              <p>{performance.description}</p>
+            </>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
