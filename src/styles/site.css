@@ -1,0 +1,57 @@
+header {
+  padding-block: clamp(3rem, 10vw, 7rem);
+  border-bottom: 0.25rem solid var(--pico-color);
+}
+
+header h1 {
+  font-size: clamp(3rem, 14vw, 7rem);
+  line-height: 0.85;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+header time {
+  display: inline-block;
+  padding: 0.35rem 0.6rem;
+  background: var(--pico-primary-background);
+  color: var(--pico-primary-inverse);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+main > section {
+  padding-block: clamp(2.5rem, 8vw, 5rem);
+  border-top: 0.125rem solid var(--pico-muted-border-color);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+#countdown {
+  font-family: var(--pico-font-family-monospace);
+  font-size: clamp(1.45rem, 6vw, 2rem);
+  line-height: 1.2;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--pico-primary);
+}
+
+#timezone {
+  font-size: 0.85rem;
+  color: var(--pico-muted-color);
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+}
+
+footer {
+  padding-block: 2rem;
+  border-top: 0.125rem solid var(--pico-muted-border-color);
+  color: var(--pico-muted-color);
+  font-size: 0.85rem;
+}
