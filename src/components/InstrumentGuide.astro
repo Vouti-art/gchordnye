@@ -1,11 +1,19 @@
 ---
 import { instruments } from "../data/instruments";
 ---
+
 <section>
-  <h2>
-    Instruments
-  </h2>
+  <h2>Instruments</h2>
   <dl>
-    {instruments.map((instrument) => (<><dt>{instrument.label}</dt>{instrument.descriptions.map((description) => <dd>{description}</dd>)}</>))}
+    {
+      instruments.map((instrument) => (
+        <>
+          <dt>{instrument.label}</dt>
+          {instrument.descriptions.map((description) => (
+            <dd>{description}</dd>
+          ))}
+        </>
+      ))
+    }
   </dl>
 </section>
