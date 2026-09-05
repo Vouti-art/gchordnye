@@ -1,3 +1,71 @@
+/* Can be forced with data-theme="light" */
+[data-theme="light"],
+:root:not([data-theme="dark"]),
+:host:not([data-theme="dark"]) {
+  --pico-background-color: #f7f4ec;
+  --pico-color: #08293b;
+  --pico-muted-color: #4f6068;
+  --pico-muted-border-color: #bdc8cc;
+  --pico-h1-color: #08293b;
+  --pico-h2-color: #08293b;
+  --pico-text-selection-color: rgba(0, 87, 200, 0.25);
+  --pico-primary: #0057c8;
+  --pico-primary-background: #0057c8;
+  --pico-primary-border: #0057c8;
+  --pico-primary-underline: rgba(0, 87, 200, 0.5);
+  --pico-primary-hover: #003f96;
+  --pico-primary-hover-background: #003f96;
+  --pico-primary-hover-border: #003f96;
+  --pico-primary-hover-underline: rgba(0, 63, 150, 0.5);
+  --pico-primary-focus: #0057c8;
+  --pico-primary-inverse: #f7f4ec;
+}
+
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]),
+  :host:not([data-theme]) {
+    --pico-background-color: #062a40;
+    --pico-color: #f7f4ec;
+    --pico-muted-color: #aabac2;
+    --pico-muted-border-color: #35566a;
+    --pico-h1-color: #f7f4ec;
+    --pico-h2-color: #f7f4ec;
+    --pico-text-selection-color: rgba(88, 166, 255, 0.35);
+    --pico-primary: #58a6ff;
+    --pico-primary-background: #58a6ff;
+    --pico-primary-border: #58a6ff;
+    --pico-primary-underline: rgba(88, 166, 255, 0.5);
+    --pico-primary-hover: #8bc0ff;
+    --pico-primary-hover-background: #8bc0ff;
+    --pico-primary-hover-border: #8bc0ff;
+    --pico-primary-hover-underline: rgba(139, 192, 255, 0.5);
+    --pico-primary-focus: #58a6ff;
+    --pico-primary-inverse: #062a40;
+  }
+}
+
+/* Enabled if forced with data-theme="dark" */
+[data-theme="dark"] {
+  --pico-background-color: #062a40;
+  --pico-color: #f7f4ec;
+  --pico-muted-color: #aabac2;
+  --pico-muted-border-color: #35566a;
+  --pico-h1-color: #f7f4ec;
+  --pico-h2-color: #f7f4ec;
+  --pico-text-selection-color: rgba(88, 166, 255, 0.35);
+  --pico-primary: #58a6ff;
+  --pico-primary-background: #58a6ff;
+  --pico-primary-border: #58a6ff;
+  --pico-primary-underline: rgba(88, 166, 255, 0.5);
+  --pico-primary-hover: #8bc0ff;
+  --pico-primary-hover-background: #8bc0ff;
+  --pico-primary-hover-border: #8bc0ff;
+  --pico-primary-hover-underline: rgba(139, 192, 255, 0.5);
+  --pico-primary-focus: #58a6ff;
+  --pico-primary-inverse: #062a40;
+}
+
 header {
   padding-block: clamp(3rem, 10vw, 7rem);
   border-bottom: 0.25rem solid var(--pico-color);
@@ -24,6 +92,10 @@ header time {
 main > section {
   padding-block: clamp(2.5rem, 8vw, 5rem);
   border-top: 0.125rem solid var(--pico-muted-border-color);
+}
+
+main > section:first-child {
+  border-top: 0px;
 }
 
 h2 {
