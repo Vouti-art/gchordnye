@@ -6,9 +6,6 @@
 <p id="timezone">Your local time</p>
 
 <script>
-  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const nyeTime = new Date(2027, 0, 1);
-
   // Seconds are rounded up
   const convertMs = (ms: number) => {
     const roundedMs = Math.ceil(ms / 1000) * 1000;
@@ -50,12 +47,13 @@
       return;
     }
 
-    if (timezoneParagraph && userTimeZone) {
-      timezoneParagraph.textContent = `Your detected time zone: ${userTimeZone}`;
-    }
-
     // Renders the countdown or completed state
     const update = () => {
+      const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const nyeTime = new Date(2027, 0, 1);
+      if (timezoneParagraph && userTimeZone) {
+        timezoneParagraph.textContent = `Your detected time zone: ${userTimeZone}`;
+      }
       const difference = calculateDifference(new Date(), nyeTime);
       const isMidnight = difference === 0;
       if (isMidnight) {
